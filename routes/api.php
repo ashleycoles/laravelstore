@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'getAllProducts');
+    Route::get('/products/{id}', 'getProductById');
+});
+
