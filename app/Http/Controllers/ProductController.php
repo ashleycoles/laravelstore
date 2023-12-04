@@ -23,4 +23,26 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
+
+
+    public function addProduct(Request $request)
+    {
+        // Accessing the request data
+        $name = $request->name;
+        $price = $request->price;
+        $description = $request->description;
+        $image = $request->image;
+
+        $new_product = new Product();
+        $new_product->name = $name;
+        $new_product->price = $price;
+        $new_product->description = $description;
+        $new_product->image = $image;
+
+        if($new_product->save()) {
+            return response('Product added');
+        }
+
+        return response('Oh no');
+    }
 }
